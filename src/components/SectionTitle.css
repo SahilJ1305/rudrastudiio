@@ -1,0 +1,65 @@
+/* SectionTitle.css */
+
+.section-header-block {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  position: relative;
+}
+
+.section-header-block.align-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-header-block.align-left {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.section-badge-wrapper {
+  margin-bottom: 1rem;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0f172a;
+  display: inline-block;
+}
+
+.section-main-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.18;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.015em;
+}
+
+.section-subtext {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.title-gold-accent-line {
+  height: 2px;
+  width: 48px;
+  background: #0f172a;
+  margin-top: 1.5rem;
+  border-radius: 2px;
+}
+
+.title-gold-accent-line.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title-gold-accent-line.align-left {
+  margin-left: 0;
+}

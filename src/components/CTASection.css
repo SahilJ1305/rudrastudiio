@@ -1,0 +1,122 @@
+/* CTASection.css - Light Editorial Styling */
+
+.cta-section-wrapper {
+  position: relative;
+  min-height: 440px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin: clamp(4rem, 7vw, 6rem) 0 0 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+.cta-bg-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cta-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  animation: slowZoomCTA 20s ease-in-out infinite alternate;
+  filter: brightness(0.95);
+  opacity: 0.18;
+}
+
+@keyframes slowZoomCTA {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.08); }
+}
+
+.cta-vignette-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(248, 250, 252, 0.92) 0%,
+    rgba(248, 250, 252, 0.96) 100%
+  );
+}
+
+.cta-container-inner {
+  position: relative;
+  z-index: 3;
+  padding-top: clamp(4rem, 6vw, 5.5rem);
+  padding-bottom: clamp(4rem, 6vw, 5.5rem);
+}
+
+.cta-content-box {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.gold-spark {
+  color: #0f172a;
+}
+
+.cta-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.3rem, 4.5vw, 3.8rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+  letter-spacing: -0.015em;
+}
+
+.cta-subtext {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+
+.cta-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.8rem;
+}
+
+.cta-btn-main {
+  padding: 1rem 2.2rem;
+  font-size: 1rem;
+}
+
+.cta-btn-secondary {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+.cta-note {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}

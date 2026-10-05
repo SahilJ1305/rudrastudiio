@@ -1,0 +1,19 @@
+/* StatsCounter.css */
+
+.stats-counter-number {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 4.8vw, 4.4rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: baseline;
+  letter-spacing: -0.02em;
+}
+
+.stats-suffix {
+  font-size: 0.75em;
+  margin-left: 2px;
+  color: var(--text-muted);
+}
+

@@ -1,0 +1,622 @@
+/* ==========================================================================
+   BookingModal Component Styles (Stepped Calendar -> Form -> Confirmation)
+   Light Theme & Solid Typography
+   ========================================================================== */
+
+.booking-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.booking-modal-card {
+  width: 100%;
+  max-width: 680px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.16);
+  display: flex;
+  flex-direction: column;
+  animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.96) translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 1.6rem 2rem 1.2rem 2rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modal-main-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.modal-close-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.modal-close-btn:hover {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+/* Progress Stepper */
+.modal-progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 2rem;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.progress-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.progress-step.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.step-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.progress-step.active .step-dot {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+  box-shadow: none;
+}
+
+.progress-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0 0.8rem;
+}
+
+/* Modal Body */
+.modal-step-body {
+  padding: 1.8rem 2rem 2.2rem 2rem;
+}
+
+/* STEP 1: CALENDAR VIEW */
+.calendar-instruction {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.2rem;
+}
+
+.calendar-widget {
+  padding: 1.4rem;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 1.6rem;
+}
+
+.calendar-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cal-month-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.cal-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cal-nav-btn:hover {
+  background: #0f172a;
+  border-color: #0f172a;
+  color: #ffffff;
+}
+
+.calendar-day-headers {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+.cal-day-header {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+
+.calendar-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.45rem;
+}
+
+.cal-day-cell {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  position: relative;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.cal-day-cell.empty {
+  background: transparent;
+  cursor: default;
+  pointer-events: none;
+}
+
+.cal-day-cell.available:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  transform: scale(1.05);
+}
+
+.cal-day-cell.selected {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  border-color: #0f172a;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+  transform: scale(1.05);
+}
+
+.cal-day-cell.past {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: transparent;
+}
+
+.selected-date-preview-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  background: #f1f5f9;
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1rem 1.4rem;
+  flex-wrap: wrap;
+}
+
+.date-preview-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.gold-icon {
+  color: #0f172a;
+}
+
+.preview-label {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.preview-value {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.proceed-btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 0.92rem;
+}
+
+/* STEP 2: DETAILS FORM */
+.selected-date-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 0.8rem 1.2rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.date-banner-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.date-banner-info strong {
+  color: var(--text-primary);
+}
+
+.edit-date-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #0f172a;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.edit-date-btn:hover {
+  text-decoration: underline;
+}
+
+.modal-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modal-field.full-row {
+  grid-column: span 2;
+}
+
+.field-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.req {
+  color: #dc2626;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 0.78rem 1rem 0.78rem 2.6rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.modal-select {
+  width: 100%;
+  padding: 0.78rem 1rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.modal-textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  outline: none;
+  resize: vertical;
+}
+
+.modal-input:focus,
+.modal-select:focus,
+.modal-textarea:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+}
+
+.modal-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.submit-enquiry-btn {
+  padding: 0.85rem 2rem;
+  font-size: 0.95rem;
+}
+
+/* STEP 3: CONFIRMATION */
+.step-confirm-view {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirm-icon-box {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 2px solid #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.confirm-check {
+  color: #0f172a;
+}
+
+.confirm-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.confirm-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: 1.4rem;
+}
+
+.ref-badge-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px dashed var(--border-subtle);
+  padding: 0.6rem 1.8rem;
+  border-radius: 12px;
+  margin-bottom: 1.6rem;
+}
+
+.ref-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.ref-number {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+}
+
+.confirm-summary-grid {
+  width: 100%;
+  max-width: 480px;
+  background: #f8fafc;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.2rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+}
+
+.sum-title {
+  color: var(--text-muted);
+}
+
+.sum-val {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.confirm-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 360px;
+}
+
+.whatsapp-btn {
+  background: #25D366;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+  background: #20b858;
+}
+
+@media (max-width: 640px) {
+  .booking-modal-card {
+    max-height: 96vh;
+    border-radius: 18px;
+  }
+  .modal-inputs-grid {
+    grid-template-columns: 1fr;
+  }
+  .modal-field.full-row {
+    grid-column: span 1;
+  }
+  .modal-header,
+  .modal-progress-bar,
+  .modal-step-body {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+  .selected-date-preview-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  .proceed-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-header {
+    padding: 1.2rem 1rem 0.8rem 1rem;
+  }
+  .modal-main-title {
+    font-size: 1.3rem;
+  }
+  .modal-progress-bar {
+    padding: 0.7rem 0.8rem;
+  }
+  .progress-step {
+    font-size: 0.72rem;
+  }
+  .progress-step span:not(.step-dot) {
+    display: none;
+  }
+  .modal-step-body {
+    padding: 1rem 0.8rem 1.4rem 0.8rem;
+  }
+  .calendar-widget {
+    padding: 0.75rem 0.4rem;
+  }
+  .calendar-days-grid {
+    gap: 0.2rem;
+  }
+  .cal-day-cell {
+    font-size: 0.82rem;
+  }
+  .cal-day-header {
+    font-size: 0.68rem;
+  }
+  .modal-form-actions {
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 0.6rem;
+  }
+  .modal-form-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

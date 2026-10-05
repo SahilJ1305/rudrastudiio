@@ -1,0 +1,173 @@
+/* CategoryCard.css */
+
+.category-card-root {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-decoration: none;
+  background: #121217;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+/* Card sizes for dynamic editorial layout */
+.card-size-tall {
+  grid-row: span 2;
+  min-height: 520px;
+}
+
+.card-size-wide {
+  grid-column: span 2;
+  min-height: 380px;
+}
+
+.card-size-normal {
+  min-height: 360px;
+}
+
+.card-media-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.card-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+  filter: brightness(0.9) contrast(1.05);
+}
+
+.card-gradient-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 9, 12, 0.02) 0%,
+    rgba(9, 9, 12, 0.15) 35%,
+    rgba(9, 9, 12, 0.65) 65%,
+    rgba(9, 9, 12, 0.95) 100%
+  );
+  transition: opacity 0.5s ease;
+}
+
+.card-glow-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+/* Overlay Content - Anchored strictly at the BOTTOM */
+.card-content-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
+  pointer-events: none;
+}
+
+/* Bottom Details */
+.card-bottom-details {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.2rem;
+  width: 100%;
+  margin-top: auto;
+}
+
+.card-text-group {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-category-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 0.45rem;
+  transition: color 0.3s ease;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.card-short-desc {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.45;
+  max-width: 400px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.card-action-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  flex-shrink: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.card-arrow {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover States */
+.category-card-root:hover {
+  transform: translateY(-5px);
+  border-color: #0f172a;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18);
+}
+
+.category-card-root:hover .card-bg-img {
+  transform: scale(1.06);
+}
+
+.category-card-root:hover .card-text-group {
+  transform: translateY(-3px);
+}
+
+.category-card-root:hover .card-category-name {
+  color: #ffffff;
+}
+
+.category-card-root:hover .card-action-circle {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0f172a;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.category-card-root:hover .card-arrow {
+  transform: translateX(3px);
+}
+
+@media (max-width: 900px) {
+  .card-size-wide {
+    grid-column: span 1;
+    min-height: 340px;
+  }
+  .card-size-tall {
+    grid-row: span 1;
+    min-height: 380px;
+  }
+}
