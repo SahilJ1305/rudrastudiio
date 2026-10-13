@@ -1,58 +1,79 @@
-/* SectionTitle.css */
+/* SectionTitle.css — eyebrow label, serif heading, muted subtitle, brand accent line */
 
 .section-header-block {
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.75rem);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .section-header-block.align-center {
   text-align: center;
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
 .section-header-block.align-left {
   text-align: left;
-  display: flex;
-  flex-direction: column;
   align-items: flex-start;
 }
 
+.section-header-block.align-right {
+  text-align: right;
+  align-items: flex-end;
+}
+
 .section-badge-wrapper {
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
+}
+
+/* Eyebrow-style badge (mirrors the global .eyebrow) */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-cyan-deep);
 }
 
 .badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #0f172a;
+  width: 28px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--brand-lime);
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .section-main-heading {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-size: clamp(1.9rem, 3.4vw, 2.8rem);
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1.15;
   color: var(--text-primary);
-  margin-bottom: 1rem;
   letter-spacing: -0.015em;
+  max-width: 22ch;
+}
+
+.section-header-block.align-center .section-main-heading {
+  max-width: none;
 }
 
 .section-subtext {
-  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  margin-top: 1rem;
+  font-size: clamp(0.98rem, 1.3vw, 1.08rem);
   line-height: 1.7;
   color: var(--text-secondary);
 }
 
 .title-gold-accent-line {
-  height: 2px;
-  width: 48px;
-  background: #0f172a;
-  margin-top: 1.5rem;
-  border-radius: 2px;
+  height: 3px;
+  width: 56px;
+  margin-top: 1.4rem;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--brand-cyan) 0%, var(--brand-lime) 100%);
 }
 
 .title-gold-accent-line.align-center {
@@ -62,4 +83,9 @@
 
 .title-gold-accent-line.align-left {
   margin-left: 0;
+}
+
+.title-gold-accent-line.align-right {
+  margin-left: auto;
+  margin-right: 0;
 }

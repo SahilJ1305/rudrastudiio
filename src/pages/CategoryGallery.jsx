@@ -1,23 +1,22 @@
 import React, { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import { 
-  ChevronRight, 
-  Sparkles, 
-  Camera, 
-  Eye, 
-  ArrowLeft, 
-  ArrowRight, 
-  Images, 
-  Calendar,
-  MapPin,
-  User
+import {
+  ChevronRight,
+  Camera,
+  Expand,
+  ArrowLeft,
+  ArrowRight,
+  Images,
+  Calendar
 } from "lucide-react";
+import PageHero from "../components/PageHero";
 import Lightbox from "../components/Lightbox";
 import CategoryCard from "../components/CategoryCard";
 import CTASection from "../components/CTASection";
 
 import { categories, getCategoryById } from "../data/categories";
 import { getPhotosByCategory } from "../data/galleryData";
+import { getThumbUrl } from "../utils/mediaUrl";
 import "./CategoryGallery.css";
 
 export default function CategoryGallery() {
@@ -38,10 +37,8 @@ export default function CategoryGallery() {
 
   // Other categories for "Explore More Categories" section
   const otherCategories = useMemo(() => {
-    if (!currentCategory) return categories.slice(0, 3);
-    return categories
-      .filter((c) => c.id !== currentCategory.id)
-      .slice(0, 3);
+    if (!currentCategory) return categories;
+    return categories.filter((c) => c.id !== currentCategory.id);
   }, [currentCategory]);
 
   const handleOpenLightbox = (index) => {
@@ -53,8 +50,8 @@ export default function CategoryGallery() {
   if (!currentCategory) {
     return (
       <div className="cat-gallery-notfound container section-padding">
-        <div className="notfound-card glass-panel">
-          <Camera size={44} className="gold-spark" />
+        <div className="notfound-card">
+          <Camera size={44} className="notfound-icon" />
           <h2>Category Not Found</h2>
           <p>The photography collection you requested does not exist or has been relocated.</p>
           <Link to="/gallery" className="btn btn-gold">
@@ -68,116 +65,79 @@ export default function CategoryGallery() {
 
   return (
     <div className="category-gallery-root">
-      {/* Category Hero Banner */}
-      <section className="category-hero-banner">
-        <div className="category-banner-bg">
-          <img 
-            src={currentCategory.coverImage} 
-            alt={currentCategory.name} 
-            className="category-bg-photo"
-          />
-          <div className="category-banner-vignette"></div>
-        </div>
+      <PageHero
+        eyebrow="Album"
+        title={currentCategory.name}
+        subtitle={currentCategory.tagline || currentCategory.shortDesc}
+        image={currentCategory.coverImage}
+        imageAlt={currentCategory.name}
+      >
+        <div className="category-action-bar">
+          <Link to="/contact" className="btn btn-gold cat-book-btn">
+            <Calendar size={16} />
+            <span>Book a {currentCategory.name} Shoot</span>
+          </Link>
 
-        <div className="container category-banner-content">
-          {/* Breadcrumb: Home → Gallery → [Category Name] */}
+          <span className="cat-photo-counter-tag">
+            <Images size={15} />
+            <span>{photos.length} photographs</span>
+          </span>
+        </div>
+      </PageHero>
+
+      {/* Breadcrumb strip: Home → Gallery → [Category Name] */}
+      <div className="category-crumb-strip">
+        <div className="container category-crumb-inner">
           <nav className="category-breadcrumbs" aria-label="Breadcrumb">
             <Link to="/" className="crumb-link">Home</Link>
             <ChevronRight size={14} className="crumb-arrow" />
             <Link to="/gallery" className="crumb-link">Gallery</Link>
             <ChevronRight size={14} className="crumb-arrow" />
-            <span className="crumb-current">{currentCategory.name}</span>
+            <span className="crumb-current" aria-current="page">{currentCategory.name}</span>
           </nav>
 
-          <div className="category-badge-pill">
-            <Sparkles size={13} className="spark-gold" />
-            <span>{currentCategory.accent || "FINE ART COLLECTION"}</span>
-          </div>
-
-          <h1 className="category-title">{currentCategory.name}</h1>
-
-          <p className="category-tagline">
-            "{currentCategory.tagline || currentCategory.shortDesc}"
-          </p>
-
-          <p className="category-description">
-            {currentCategory.description}
-          </p>
-
-          <div className="category-action-bar">
-            <Link to="/contact" className="btn btn-gold cat-book-btn">
-              <Calendar size={16} />
-              <span>Book a {currentCategory.name} Shoot</span>
-            </Link>
-
-            <span className="cat-photo-counter-tag">
-              <Images size={15} />
-              <span>{photos.length} Curated High-Resolution Frames</span>
-            </span>
-          </div>
+          <Link to="/gallery" className="crumb-back-link">
+            <ArrowLeft size={15} />
+            <span>All albums</span>
+          </Link>
         </div>
-      </section>
+      </div>
 
       {/* Main Image Grid for This Category */}
-      <section className="category-photos-section section-padding">
+      <section className="category-photos-section">
         <div className="container">
           <div className="cat-section-header">
             <div className="header-left">
+              <span className="eyebrow">{currentCategory.accent || "The Collection"}</span>
               <h2 className="cat-section-title">The Collection</h2>
-              <p className="cat-section-subtitle">
-                Click any photograph below to view in full-screen cinematic resolution with metadata.
-              </p>
             </div>
-
             <div className="header-right">
-              <Link to="/gallery" className="btn btn-outline back-gallery-btn">
-                <ArrowLeft size={16} />
-                <span>All Categories</span>
-              </Link>
+              {currentCategory.description && (
+                <p className="cat-section-subtitle">{currentCategory.description}</p>
+              )}
             </div>
           </div>
 
           <div className="category-photos-grid">
             {photos.map((photo, index) => (
-              <div 
+              <button
                 key={photo.id}
-                className={`cat-photo-card orient-${photo.orientation}`}
+                type="button"
+                className="cat-photo-tile"
+                style={{ aspectRatio: photo.aspectRatio }}
                 onClick={() => handleOpenLightbox(index)}
+                aria-label={`Open photo ${index + 1} of ${photos.length}`}
               >
-                <div className="cat-photo-wrapper">
-                  <img 
-                    src={photo.url} 
-                    alt={photo.title} 
-                    loading="lazy" 
-                    className="cat-photo-img"
-                  />
-
-                  <div className="cat-photo-overlay">
-                    <div className="photo-card-top">
-                      <span className="photo-num-badge">
-                        #{String(index + 1).padStart(2, "0")}
-                      </span>
-                    </div>
-
-                    <div className="photo-card-bottom">
-                      <h4 className="photo-card-title">{photo.title}</h4>
-                      {photo.client && (
-                        <p className="photo-card-meta">
-                          <User size={12} className="meta-icon" /> {photo.client}
-                        </p>
-                      )}
-                      {photo.location && (
-                        <p className="photo-card-meta">
-                          <MapPin size={12} className="meta-icon" /> {photo.location}
-                        </p>
-                      )}
-                      <span className="cat-photo-action">
-                        <Eye size={14} /> View Lightbox
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <img
+                  src={getThumbUrl(photo.url, 700)}
+                  alt={photo.title}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span className="cat-photo-icon" aria-hidden="true">
+                  <Expand size={16} />
+                </span>
+              </button>
             ))}
           </div>
         </div>
@@ -188,18 +148,18 @@ export default function CategoryGallery() {
         <div className="container">
           <div className="explore-more-header">
             <div>
-              <span className="badge-gold">CONTINUE BROWSING</span>
-              <h2 className="explore-more-title">Explore More Categories</h2>
+              <span className="eyebrow">Continue browsing</span>
+              <h2 className="explore-more-title">More albums</h2>
             </div>
             <Link to="/gallery" className="btn btn-outline">
-              <span>View All 10 Categories</span>
+              <span>View All {categories.length} Albums</span>
               <ArrowRight size={16} />
             </Link>
           </div>
 
           <div className="explore-more-grid">
             {otherCategories.map((cat) => (
-              <CategoryCard key={cat.id} category={cat} size="normal" />
+              <CategoryCard key={cat.id} category={cat} />
             ))}
           </div>
         </div>

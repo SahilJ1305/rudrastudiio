@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Camera, Menu, X, ArrowUpRight, Phone, Sparkles, LayoutDashboard } from "lucide-react";
+import { Menu, X, ArrowUpRight, Phone, Sparkles } from "lucide-react";
+import { studio } from "../data/studio";
 import { useBooking } from "../context/BookingContext";
-import studioLogo from "../assets/logo-light-bg.png";
+import logoOnDark from "../assets/logo.png";
+import logoOnLight from "../assets/logo-light-bg.png";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -41,6 +43,9 @@ export default function Navbar() {
     };
   }, [mobileMenuOpen]);
 
+  // Over the homepage video the bar is transparent with the white logo
+  const overHero = location.pathname === "/" && !scrolled && !mobileMenuOpen;
+
   const handleLogoClick = () => {
     if (location.pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -48,45 +53,45 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`navbar-wrapper ${scrolled ? "navbar-scrolled" : "navbar-transparent"}`}>
+    <header className={`navbar-wrapper ${overHero ? "navbar-over-hero" : "navbar-solid"} ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-container">
         {/* Brand / Logo (Only the logo image, links back to home) */}
-        <Link 
-          to="/" 
-          className="navbar-logo" 
-          aria-label="Rudra Studiio Home" 
+        <Link
+          to="/"
+          className="navbar-logo"
+          aria-label="Rudra Studiio Home"
           onClick={handleLogoClick}
         >
-          <img 
-            src={studioLogo} 
-            alt="Rudra Studiio" 
-            className="navbar-brand-logo" 
+          <img
+            src={overHero ? logoOnDark : logoOnLight}
+            alt="Rudra Studiio"
+            className="navbar-brand-logo"
           />
         </Link>
 
         {/* Desktop Navigation Links */}
         <nav className="navbar-links" aria-label="Main Navigation">
-          <NavLink 
-            to="/" 
+          <NavLink
+            to="/"
             className={({ isActive }) => `nav-link ${isActive ? "nav-link-active" : ""}`}
             end
           >
             <span>Home</span>
           </NavLink>
-          <NavLink 
-            to="/gallery" 
+          <NavLink
+            to="/gallery"
             className={({ isActive }) => `nav-link ${isActive ? "nav-link-active" : ""}`}
           >
             <span>Gallery</span>
           </NavLink>
-          <NavLink 
-            to="/about" 
+          <NavLink
+            to="/about"
             className={({ isActive }) => `nav-link ${isActive ? "nav-link-active" : ""}`}
           >
             <span>About Us</span>
           </NavLink>
-          <NavLink 
-            to="/contact" 
+          <NavLink
+            to="/contact"
             className={({ isActive }) => `nav-link ${isActive ? "nav-link-active" : ""}`}
           >
             <span>Contact Us</span>
@@ -95,8 +100,8 @@ export default function Navbar() {
 
         {/* Desktop CTA Action */}
         <div className="navbar-actions">
-          <button 
-            onClick={() => openBookingModal()} 
+          <button
+            onClick={() => openBookingModal()}
             className="btn btn-gold navbar-cta"
             aria-label="Book a Shoot"
           >
@@ -107,7 +112,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Hamburger Toggle */}
-        <button 
+        <button
           className="mobile-toggle-btn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -125,50 +130,43 @@ export default function Navbar() {
             <span className="mobile-nav-divider"></span>
           </div>
           <nav className="mobile-nav-links">
-            <NavLink 
-              to="/" 
+            <NavLink
+              to="/"
               className={({ isActive }) => `mobile-nav-link ${isActive ? "active" : ""}`}
               end
             >
               <span className="nav-num">01</span>
               <span>Home</span>
             </NavLink>
-            <NavLink 
-              to="/gallery" 
+            <NavLink
+              to="/gallery"
               className={({ isActive }) => `mobile-nav-link ${isActive ? "active" : ""}`}
             >
               <span className="nav-num">02</span>
               <span>Gallery</span>
             </NavLink>
-            <NavLink 
-              to="/about" 
+            <NavLink
+              to="/about"
               className={({ isActive }) => `mobile-nav-link ${isActive ? "active" : ""}`}
             >
               <span className="nav-num">03</span>
               <span>About Us</span>
             </NavLink>
-            <NavLink 
-              to="/contact" 
+            <NavLink
+              to="/contact"
               className={({ isActive }) => `mobile-nav-link ${isActive ? "active" : ""}`}
             >
               <span className="nav-num">04</span>
               <span>Contact Us</span>
             </NavLink>
-            <NavLink 
-              to="/dashboard" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? "active" : ""}`}
-            >
-              <span className="nav-num">05</span>
-              <span>Staff Dashboard</span>
-            </NavLink>
           </nav>
 
           <div className="mobile-menu-footer">
-            <button 
+            <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 openBookingModal();
-              }} 
+              }}
               className="btn btn-gold mobile-cta-btn"
             >
               <Sparkles size={18} />
@@ -176,7 +174,7 @@ export default function Navbar() {
             </button>
             <div className="mobile-contact-quick">
               <Phone size={15} className="quick-icon" />
-              <span>Direct Studio line: +91 98765 43210</span>
+              <a href={`tel:${studio.phoneTel}`}>Call the studio: {studio.phoneDisplay}</a>
             </div>
           </div>
         </div>

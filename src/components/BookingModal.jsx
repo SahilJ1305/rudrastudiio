@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { 
-  X, 
-  Calendar as CalendarIcon, 
-  ChevronLeft, 
-  ChevronRight, 
-  CheckCircle2, 
-  Sparkles, 
-  ArrowRight, 
-  Phone, 
-  Mail, 
-  User, 
-  MapPin, 
+import {
+  X,
+  Calendar as CalendarIcon,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle2,
+  Sparkles,
+  ArrowRight,
+  Phone,
+  Mail,
+  User,
+  MapPin,
   MessageSquare,
-  ArrowLeft,
-  Clock
+  ArrowLeft
+
 } from "lucide-react";
 import { categories } from "../data/categories";
-import { saveEnquiry } from "../utils/storage";
+import { whatsappUrl, buildEnquiryMessage, sendEnquiryToWhatsApp } from "../data/studio";
 import "./BookingModal.css";
 
 const MONTH_NAMES = [
@@ -47,7 +47,6 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
   });
 
   const [submittedEnquiry, setSubmittedEnquiry] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Reset or initialize on open
   useEffect(() => {
@@ -140,30 +139,24 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle Submit
+  // Nothing is stored: the enquiry opens in WhatsApp, addressed to the studio, with every detail filled in
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
     const categoryObj = categories.find((c) => c.id === formData.eventType);
-    const eventName = categoryObj ? categoryObj.name : "Photography Shoot";
+    const enquiry = {
+      name: formData.fullName,
+      mobile: formData.mobile,
+      email: formData.email,
+      service: categoryObj ? categoryObj.name : "Photography Shoot",
+      date: selectedDate,
+      location: formData.location,
+      details: formData.message
+    };
 
-    setTimeout(() => {
-      const created = saveEnquiry({
-        fullName: formData.fullName,
-        mobile: formData.mobile,
-        email: formData.email,
-        eventType: formData.eventType,
-        eventName: eventName,
-        preferredDate: selectedDate,
-        location: formData.location,
-        message: formData.message
-      });
-
-      setSubmittedEnquiry(created);
-      setIsSubmitting(false);
-      setStep(3);
-    }, 700);
+    sendEnquiryToWhatsApp(enquiry);
+    setSubmittedEnquiry({ ...enquiry, link: whatsappUrl(buildEnquiryMessage(enquiry)) });
+    setStep(3);
   };
 
   return (
@@ -179,7 +172,7 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
             <h3 className="modal-main-title">
               {step === 1 && "Step 1: Choose Your Preferred Date"}
               {step === 2 && "Step 2: Client & Event Details"}
-              {step === 3 && "Enquiry Confirmed"}
+              {step === 3 && "Send It on WhatsApp"}
             </h3>
           </div>
 
@@ -190,7 +183,7 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
 
         {/* Progress Bar */}
         <div className="modal-progress-bar">
-          <div 
+          <div
             className={`progress-step ${step >= 1 ? "active" : ""}`}
             onClick={() => step === 2 && setStep(1)}
           >
@@ -205,7 +198,7 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
           <div className="progress-divider"></div>
           <div className={`progress-step ${step >= 3 ? "active" : ""}`}>
             <span className="step-dot">3</span>
-            <span className="step-label">Confirmation</span>
+            <span className="step-label">WhatsApp</span>
           </div>
         </div>
 
@@ -220,8 +213,8 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
             <div className="calendar-widget glass-card">
               {/* Month Navigation */}
               <div className="calendar-nav-bar">
-                <button 
-                  className="cal-nav-btn" 
+                <button
+                  className="cal-nav-btn"
                   onClick={handlePrevMonth}
                   aria-label="Previous Month"
                 >
@@ -230,8 +223,8 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
                 <div className="cal-month-title">
                   {MONTH_NAMES[currentMonth]} {currentYear}
                 </div>
-                <button 
-                  className="cal-nav-btn" 
+                <button
+                  className="cal-nav-btn"
                   onClick={handleNextMonth}
                   aria-label="Next Month"
                 >
@@ -285,7 +278,7 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
                 </div>
               </div>
 
-              <button 
+              <button
                 className="btn btn-gold proceed-btn"
                 onClick={() => setStep(2)}
                 disabled={!selectedDate}
@@ -306,8 +299,8 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
                 <CalendarIcon size={17} className="gold-icon" />
                 <span>Shoot Date: <strong>{formatDisplayDate(selectedDate)}</strong></span>
               </div>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="edit-date-btn"
                 onClick={() => setStep(1)}
               >
@@ -342,7 +335,7 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
                     type="tel"
                     name="mobile"
                     required
-                    placeholder="+91 98765 00000"
+                    placeholder="+91 90000 00000"
                     value={formData.mobile}
                     onChange={handleInputChange}
                     className="modal-input"
@@ -370,13 +363,12 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
 
               {/* Email Address */}
               <div className="modal-field">
-                <label className="field-label">Email Address <span className="req">*</span></label>
+                <label className="field-label">Email Address</label>
                 <div className="input-wrap">
                   <Mail size={16} className="input-icon" />
                   <input
                     type="email"
                     name="email"
-                    required
                     placeholder="e.g. radhika@example.com"
                     value={formData.email}
                     onChange={handleInputChange}
@@ -417,27 +409,17 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
 
             {/* Actions */}
             <div className="modal-form-actions">
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="btn btn-outline"
                 onClick={() => setStep(1)}
               >
                 <ArrowLeft size={16} /> Back to Calendar
               </button>
 
-              <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className="btn btn-gold submit-enquiry-btn"
-              >
-                {isSubmitting ? (
-                  <span>Sending Enquiry...</span>
-                ) : (
-                  <>
-                    <span>Send Enquiry</span>
-                    <ArrowRight size={17} />
-                  </>
-                )}
+              <button type="submit" className="btn btn-gold submit-enquiry-btn">
+                <MessageSquare size={17} />
+                <span>Send Enquiry on WhatsApp</span>
               </button>
             </div>
           </form>
@@ -450,24 +432,20 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
               <CheckCircle2 size={52} className="confirm-check" />
             </div>
 
-            <h3 className="confirm-title">Enquiry Sent Successfully!</h3>
+            <h3 className="confirm-title">Your enquiry is ready!</h3>
             <p className="confirm-sub">
-              Thank you, <strong>{submittedEnquiry.fullName}</strong>. Your shoot request has been recorded and assigned reference:
+              Thank you, <strong>{submittedEnquiry.name}</strong>. WhatsApp should now be open with your enquiry already written.
+              <strong> Press Send in WhatsApp</strong> to deliver it to Rudra Studio.
             </p>
-
-            <div className="ref-badge-card">
-              <span className="ref-label">BOOKING REFERENCE</span>
-              <span className="ref-number">{submittedEnquiry.refCode}</span>
-            </div>
 
             <div className="confirm-summary-grid glass-card">
               <div className="summary-row">
                 <span className="sum-title">Event:</span>
-                <span className="sum-val">{submittedEnquiry.eventName}</span>
+                <span className="sum-val">{submittedEnquiry.service}</span>
               </div>
               <div className="summary-row">
                 <span className="sum-title">Preferred Date:</span>
-                <span className="sum-val">{formatDisplayDate(submittedEnquiry.preferredDate)}</span>
+                <span className="sum-val">{formatDisplayDate(submittedEnquiry.date)}</span>
               </div>
               <div className="summary-row">
                 <span className="sum-title">Client Mobile:</span>
@@ -480,14 +458,14 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
             </div>
 
             <div className="confirm-action-buttons">
-              <a 
-                href={`https://wa.me/919876543210?text=Hi%20Rudra%20Studio,%20I%20have%20submitted%20booking%20enquiry%20${submittedEnquiry.refCode}%20for%20${submittedEnquiry.eventName}%20on%20${submittedEnquiry.preferredDate}.`}
+              <a
+                href={submittedEnquiry.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-gold whatsapp-btn"
               >
                 <MessageSquare size={17} />
-                <span>Instant Connect on WhatsApp</span>
+                <span>WhatsApp did not open? Tap here</span>
               </a>
 
               <button onClick={onClose} className="btn btn-outline">

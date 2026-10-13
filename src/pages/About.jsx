@@ -1,82 +1,68 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { 
-  Sparkles, 
-  Camera, 
-  Heart, 
-  CheckCircle, 
-  ArrowRight, 
-  Award, 
-  Compass, 
-  Palette, 
-  Layers, 
-  ShieldCheck 
-} from "lucide-react";
-import { InstagramIcon } from "../components/SocialIcons";
-import SectionTitle from "../components/SectionTitle";
+import PageHero from "../components/PageHero";
 import StatsCounter from "../components/StatsCounter";
 import CTASection from "../components/CTASection";
 
-import { teamMembers, studioStats, studioPhilosophy, studioApproach } from "../data/team";
+import { studioStats, studioPhilosophy } from "../data/team";
+import { studio } from "../data/studio";
+import { getThumbUrl, getFullsizeUrl } from "../utils/mediaUrl";
 import "./About.css";
+
+const FOUNDER_IMAGE = "/Images/team/laxman-jagtap.png";
+const GROUP_IMAGE = "/Images/Group image.jpeg";
 
 export default function About() {
   return (
     <div className="about-page-root">
-      {/* 1. Hero Header */}
-      <section className="about-hero-section">
-        <div className="container">
-          <div className="about-hero-text">
-            <span className="badge-gold">ABOUT RUDRA STUDIIO</span>
-            <h1 className="about-main-title">
-              Crafting Stories That <br />
-              <span className="gold-gradient-text">Defy Time</span>
-            </h1>
-            <p className="about-hero-sub">
-              Founded on the belief that genuine emotion outshines staged perfection. We are a collective of dedicated visual artists, cinematographers, and storytellers.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 1. Page header */}
+      <PageHero
+        eyebrow="About Rudra Studio"
+        title="We Capture Purpose"
+        subtitle="Every moment has a story. Every brand has a purpose. At Rudra Studio, Hadapsar, Pune, we transform special moments and powerful business stories into memorable photographs and films."
+        image="/Images/baby/231A0695 copy.jpg"
+        imageAlt="Baby portrait by Rudra Studio"
+      />
 
       {/* 2. Our Story Section */}
       <section className="about-story-section section-padding">
         <div className="container">
           <div className="story-grid">
             <div className="story-image-wrap">
-              <img 
-                src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80" 
-                alt="Studio craft and camera lenses" 
-                className="story-main-img" 
+              <img
+                src={getThumbUrl(FOUNDER_IMAGE, 800)}
+                srcSet={`${getThumbUrl(FOUNDER_IMAGE, 800)} 800w, ${getFullsizeUrl(FOUNDER_IMAGE)} 864w`}
+                sizes="(max-width: 960px) 100vw, 45vw"
+                alt={`${studio.founder}, founder of Rudra Studio`}
+                className="story-main-img story-founder-img"
                 loading="lazy"
               />
-              <div className="story-accent-card glass-panel">
-                <span className="accent-est">ESTABLISHED 2014</span>
-                <h4 className="accent-quote">"Light is our paintbrush, emotion is our canvas."</h4>
+              <div className="story-accent-card">
+                <span className="accent-est">STUDIO FOUNDER</span>
+                <p className="accent-quote">{studio.founder}</p>
               </div>
             </div>
 
             <div className="story-text-column">
-              <span className="badge-gold">OUR STORY</span>
-              <h2 className="story-heading">From a Darkroom Dream to an International Atelier</h2>
+              <span className="eyebrow">Our Story</span>
+              <h2 className="story-heading">Photography and Films Under One Roof</h2>
               <p className="story-p">
-                Over a decade ago, Rudra Studiio was born in a sun-drenched loft in Mumbai. Armed with a vintage Leica, an uncompromising love for natural chiaroscuro light, and a conviction that modern photography had become too formulaic, our founders set out to redefine portraiture and event storytelling.
+                Rudra Studio is a photography and videography studio in Hadapsar, Pune, founded by {studio.founder}. We cover weddings and pre-weddings, kids, maternity and sports, events, conferences and stage shows, as well as product, corporate and industrial work.
               </p>
               <p className="story-p">
-                Today, our work spans high-society destination weddings in Udaipur, Lake Como, and Bali, high-fashion editorials for leading fashion houses, and tender newborn milestones for hundreds of families worldwide.
+                We offer customized packages for different requirements and bring a professional approach to every project, from a family celebration to a company profile film.
               </p>
               <p className="story-p">
-                While our optical gear and post-production suites have evolved into state-of-the-art cinema systems, our fundamental premise remains unaltered: we treat your memories as sacred heirlooms.
+                Our services reach across India for large weddings and events.
               </p>
 
               <div className="story-stats-inline">
                 <div className="inline-stat-item">
-                  <span className="stat-gold">14+</span>
-                  <span className="stat-label">Countries Documented</span>
+                  <span className="stat-gold">Pune</span>
+                  <span className="stat-label">Studio in Hadapsar</span>
                 </div>
                 <div className="inline-stat-item">
-                  <span className="stat-gold">45+</span>
-                  <span className="stat-label">Industry Accolades</span>
+                  <span className="stat-gold">India</span>
+                  <span className="stat-label">Weddings &amp; events</span>
                 </div>
               </div>
             </div>
@@ -87,7 +73,7 @@ export default function About() {
       {/* 3. Studio Stats Section (Animated Counters) */}
       <section className="about-stats-section">
         <div className="container">
-          <div className="stats-glass-container glass-panel">
+          <div className="stats-glass-container">
             <div className="stats-grid">
               {studioStats.map((stat, idx) => (
                 <div key={idx} className="stat-column">
@@ -109,7 +95,7 @@ export default function About() {
       <section className="philosophy-section section-padding">
         <div className="container">
           <div className="philosophy-content-wrap">
-            <span className="badge-gold">THE CORE ETHOS</span>
+            <span className="eyebrow">The Core Ethos</span>
             <blockquote className="philosophy-quote">
               "{studioPhilosophy.quote}"
             </blockquote>
@@ -118,95 +104,44 @@ export default function About() {
             </p>
             <div className="philosophy-signature-row">
               <div className="gold-accent-dot"></div>
-              <span>Rudra Sharma & Anya Sen — Studio Founders</span>
+              <span>{studio.founder} — Studio Founder</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 5. Our 5-Step Approach */}
-      <section className="approach-section section-padding">
-        <div className="container">
-          <SectionTitle 
-            badge="METICULOUS PROCESS"
-            title={<>Our 5-Step <span className="gold-gradient-text">Creative Approach</span></>}
-            subtitle="How we transition from initial concept to delivering an enduring heirloom gallery."
-          />
-
-          <div className="approach-steps-grid">
-            {studioApproach.map((step) => (
-              <div key={step.step} className="approach-step-card glass-card">
-                <div className="step-number-tag">{step.step}</div>
-                <h3 className="step-title">{step.title}</h3>
-                <p className="step-desc">{step.description}</p>
-                <div className="step-gold-line"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Our Team Section */}
+      {/* 5. Behind the Lens: one group photo of the team */}
       <section className="team-section section-padding">
         <div className="container">
-          <SectionTitle 
-            badge="CREATIVE MASTERS"
-            title={<>Behind <span className="gold-gradient-text">The Lenses</span></>}
-            subtitle="Meet the artists, stylists, and colorists who bring heart, precision, and passion to every shoot."
-          />
+          <div className="team-feature">
+            <div className="team-feature-text">
+              <span className="eyebrow">The Team</span>
+              <h2 className="team-heading">Behind The Lens</h2>
+              <p>
+                The people behind every photograph and film at Rudra Studio, working together to capture your moments and your story.
+              </p>
+              <p className="team-founder">
+                <strong>{studio.founder}</strong>
+                <span>Studio Founder</span>
+              </p>
+            </div>
 
-          <div className="team-cards-grid">
-            {teamMembers.map((member) => (
-              <div key={member.id} className="team-member-card">
-                <div className="team-photo-wrap">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="team-photo-img"
-                    loading="lazy"
-                  />
-                  <div className="team-social-overlay">
-                    <a 
-                      href="https://instagram.com" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="team-social-link"
-                      aria-label={`${member.name} Instagram`}
-                    >
-                      <InstagramIcon size={18} />
-                      <span>{member.instagram}</span>
-                    </a>
-                  </div>
-                </div>
-
-                <div className="team-details">
-                  <div className="team-header-row">
-                    <div>
-                      <h3 className="team-name">{member.name}</h3>
-                      <p className="team-role">{member.role}</p>
-                    </div>
-                    <span className="team-exp-badge">{member.experience}</span>
-                  </div>
-
-                  <p className="team-bio">{member.bio}</p>
-
-                  <div className="team-award-tag">
-                    <Award size={14} className="award-icon" />
-                    <span>{member.awards}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <figure className="team-photo-frame">
+              <img
+                src={getFullsizeUrl(GROUP_IMAGE)}
+                alt="The Rudra Studio team"
+                className="team-photo"
+                loading="lazy"
+              />
+            </figure>
           </div>
         </div>
       </section>
 
       {/* Call to Action */}
-      <CTASection 
-        heading="Let's Begin Your Chapter."
-        subtext="Schedule an in-person or virtual consultation with our creative directors to discuss your celebration."
-        primaryBtnText="Schedule a Consultation"
-        primaryBtnLink="/contact"
+      <CTASection
+        heading="Let's Create Something Meaningful."
+        subtext="Contact Rudra Studio to discuss your project, check availability and receive a customized quotation."
         secondaryBtnText="Explore Our Portfolio"
         secondaryBtnLink="/gallery"
       />

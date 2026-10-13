@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { 
-  Camera, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Clock, 
-  ArrowUpRight,
-  Heart
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Globe,
+  ArrowUpRight
+
 } from "lucide-react";
-import { InstagramIcon, FacebookIcon, YoutubeIcon } from "./SocialIcons";
-import studioLogo from "../assets/logo-light-bg.png";
+import { YoutubeIcon } from "./SocialIcons";
+import { studio, whatsappUrl } from "../data/studio";
+import studioLogo from "../assets/logo.png";
 import "./Footer.css";
 
 export default function Footer() {
@@ -21,7 +21,7 @@ export default function Footer() {
   return (
     <footer className="footer-wrapper">
       <div className="footer-top-accent"></div>
-      
+
       <div className="container footer-content">
         <div className="footer-grid">
           {/* Brand Column */}
@@ -29,23 +29,17 @@ export default function Footer() {
             <Link to="/" className="footer-logo" onClick={scrollToTopSmooth} aria-label="Rudra Studiio Home">
               <img src={studioLogo} alt="Rudra Studiio" className="footer-brand-logo-img" />
             </Link>
-            
+
             <p className="footer-motto">
-              "Capturing moments. Creating memories."
+              {studio.tagline}.
             </p>
-            
+
             <p className="footer-bio">
-              A premier luxury photography & cinematography studio dedicated to immortalizing life's most profound celebrations with editorial grace and emotional depth.
+              At Rudra Studio, Hadapsar, Pune, we transform special moments and powerful business stories into memorable photographs and films.
             </p>
 
             <div className="footer-socials">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="social-pill">
-                <InstagramIcon size={18} />
-              </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="social-pill">
-                <FacebookIcon size={18} />
-              </a>
-              <a href="https://youtube.com/@rudrastudiio?si=2MdmxG5qGv20cG4G" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="social-pill">
+              <a href={studio.youtubeUrl} target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="social-pill">
                 <YoutubeIcon size={18} />
               </a>
             </div>
@@ -81,17 +75,12 @@ export default function Footer() {
                   <ArrowUpRight size={14} />
                 </Link>
               </li>
-              <li>
-                <Link to="/dashboard" onClick={scrollToTopSmooth} className="dashboard-footer-link">
-                  <span>Concierge Dashboard</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
           {/* Categories Column */}
           <div className="footer-col">
-            <h4 className="footer-heading">Categories</h4>
+            <h4 className="footer-heading">Services</h4>
             <ul className="footer-links-list">
               <li>
                 <Link to="/gallery/wedding" onClick={scrollToTopSmooth}>
@@ -99,28 +88,28 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/gallery/baby" onClick={scrollToTopSmooth}>
-                  <span>Baby Photography</span>
+                <Link to="/gallery/pre-wedding" onClick={scrollToTopSmooth}>
+                  <span>Pre-Wedding Photography</span>
                 </Link>
               </li>
               <li>
-                <Link to="/gallery/maternity" onClick={scrollToTopSmooth}>
-                  <span>Maternity Photography</span>
+                <Link to="/gallery/industrial" onClick={scrollToTopSmooth}>
+                  <span>Industrial Photography</span>
                 </Link>
               </li>
               <li>
-                <Link to="/gallery/portrait" onClick={scrollToTopSmooth}>
-                  <span>Portrait Photography</span>
+                <Link to="/gallery/product" onClick={scrollToTopSmooth}>
+                  <span>Product Photography</span>
                 </Link>
               </li>
               <li>
-                <Link to="/gallery/fashion" onClick={scrollToTopSmooth}>
-                  <span>Fashion Photography</span>
+                <Link to="/gallery/events" onClick={scrollToTopSmooth}>
+                  <span>Events &amp; Celebrations</span>
                 </Link>
               </li>
               <li>
                 <Link to="/gallery" onClick={scrollToTopSmooth} className="all-cats-link">
-                  <span>View All 10 Categories →</span>
+                  <span>View All Albums →</span>
                 </Link>
               </li>
             </ul>
@@ -133,32 +122,34 @@ export default function Footer() {
               <div className="footer-contact-item">
                 <MapPin size={18} className="contact-icon" />
                 <div>
-                  <p className="contact-bold">Rudra Photo Studio</p>
-                  <p className="contact-light">Shop No. 22, Chourang Terrace Society, Tukai Darshan, Phursungi, Hadapsar, Pune</p>
+                  <p className="contact-bold">Rudra Studio</p>
+                  <p className="contact-light">{studio.address}</p>
                 </div>
               </div>
 
               <div className="footer-contact-item">
                 <Phone size={18} className="contact-icon" />
                 <div>
-                  <a href="tel:+919876543210" className="contact-link">+91 98765 43210</a>
-                  <p className="contact-light">Concierge & Bookings</p>
+                  <a href={`tel:${studio.phoneTel}`} className="contact-link">{studio.phoneDisplay}</a>
+                  <p className="contact-light">
+                    <a href={whatsappUrl("Hello Rudra Studio")} target="_blank" rel="noopener noreferrer" className="contact-link">WhatsApp us</a>
+                  </p>
                 </div>
               </div>
 
               <div className="footer-contact-item">
                 <Mail size={18} className="contact-icon" />
                 <div>
-                  <a href="mailto:hello@rudrastudiio.in" className="contact-link">hello@rudrastudiio.in</a>
-                  <p className="contact-light">Editorial & Commissions</p>
+                  <a href={`mailto:${studio.email}`} className="contact-link">{studio.email}</a>
+                  <p className="contact-light">Quotations &amp; project enquiries</p>
                 </div>
               </div>
 
               <div className="footer-contact-item">
-                <Clock size={18} className="contact-icon" />
+                <Globe size={18} className="contact-icon" />
                 <div>
-                  <p className="contact-bold">Tue – Sun: 9:00 AM – 8:00 PM</p>
-                  <p className="contact-light">Mondays by appointment only</p>
+                  <p className="contact-bold">Hadapsar, Pune</p>
+                  <p className="contact-light">Services across India</p>
                 </div>
               </div>
             </div>
@@ -168,12 +159,12 @@ export default function Footer() {
         {/* Footer Bottom Divider & Bar */}
         <div className="footer-bottom-bar">
           <div className="footer-bottom-left">
-            <p>© 2026 Rudra Studiio. All Rights Reserved.</p>
+            <p>© 2026 Rudra Studio. All Rights Reserved.</p>
           </div>
 
           <div className="footer-bottom-center">
             <p className="designed-passion">
-              Designed with <Heart size={14} className="heart-icon" /> passion for photography.
+              We Capture Purpose.
             </p>
           </div>
 

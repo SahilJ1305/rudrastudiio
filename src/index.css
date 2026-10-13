@@ -1,76 +1,105 @@
 @import "tailwindcss";
 
 @theme {
-  --color-studio-dark: #0f172a;
-  --color-studio-surface: #f8fafc;
+  --color-studio-dark: #0f1a24;
+  --color-studio-surface: #f6f8f8;
   --color-studio-card: #ffffff;
-  --color-studio-hover: #f1f5f9;
-  --color-gold-primary: #0f172a;
-  --color-gold-light: #334155;
-  --color-brand-lime: #658200;
-  --color-brand-cyan: #0284c7;
-  --color-brand-amber: #d97706;
-  
+  --color-studio-hover: #eef2f3;
+  --color-gold-primary: #0a7f91;
+  --color-gold-light: #2ce8ff;
+  --color-brand-lime: #a4cc00;
+  --color-brand-cyan: #2ce8ff;
+  --color-brand-amber: #ffc800;
+
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-editorial: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* ==========================================================================
-   RUDRA STUDIIO - Luxury Photography & Cinematography
-   Design System & Global Styles (Editorial Light Theme)
+   RUDRA STUDIIO - Photography & Cinematography
+   Design System & Global Styles (Light theme in the logo's brand colors)
    ========================================================================== */
 
 :root {
-  /* Color Palette - Crisp Editorial White, Porcelain & Slate */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
-  --bg-card: #ffffff;
-  --bg-card-hover: #fcfcfd;
-  --bg-surface-glass: rgba(255, 255, 255, 0.94);
+  color-scheme: light;
 
-  /* Plain Editorial Typography Colors (Plain, No mixed colors) */
-  --text-primary: #0f172a;            /* Deep rich slate black for headlines */
-  --text-secondary: #475569;          /* Sophisticated slate for body copy */
-  --text-muted: #64748b;              /* Clean muted label text */
-  --text-accent: #0f172a;             /* Plain accent */
+  /* Brand colors, sampled from the studio logo.
+     The bright values are for FILLS (buttons, bars, dots); use the -deep
+     variants for text and icons so they stay readable on white. */
+  --brand-cyan: #2ce8ff;              /* "STUDIIO" wordmark */
+  --brand-cyan-deep: #0a7f91;         /* cyan for text/icons on white */
+  --brand-lime: #a4cc00;              /* Camera body */
+  --brand-lime-deep: #5f7d00;         /* lime for text on white */
+  --brand-amber: #ffc800;             /* Lens ring - ratings, highlights */
+  --brand-yellow: #ffea00;            /* "We Capture Purpose" tagline */
+  --brand-ink: #0f1a24;               /* Deep ink for the footer & dark bands */
+
+  /* Surfaces */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f6f8f8;
+  --bg-tertiary: #eef2f3;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-elevated: #f4f7f8;             /* Inputs, chips, raised controls */
+  --bg-surface-glass: rgba(255, 255, 255, 0.92);
+
+  /* Typography */
+  --text-primary: #0f1a24;
+  --text-secondary: #4a5865;
+  --text-muted: #6b7884;
+  --text-accent: var(--brand-cyan-deep);
+  --text-on-accent: #0f1a24;          /* Text placed on cyan / lime / amber fills */
+  --text-on-image: #ffffff;           /* Text placed over photos and video */
 
   /* Borders & Dividers */
-  --border-subtle: #e2e8f0;
-  --border-glass: rgba(0, 0, 0, 0.08);
-  --border-gold: #cbd5e1;
-  --border-cyan: #94a3b8;
-  --border-gold-glow: #64748b;
+  --border-subtle: #e3e8eb;
+  --border-strong: #cdd5da;
+  --border-glass: rgba(15, 26, 36, 0.08);
+  --border-gold: rgba(10, 127, 145, 0.35);
+  --border-cyan: rgba(10, 127, 145, 0.35);
+  --border-gold-glow: rgba(10, 127, 145, 0.6);
 
-  /* Accent Tones */
-  --brand-lime: #658200;
-  --brand-cyan: #0284c7;
-  --brand-amber: #d97706;
-  --gold-primary: #0f172a;
-  --gold-light: #1e293b;
-  --gold-dark: #020617;
-  --gold-amber: #334155;
-  --gold-gradient: none;
-  --gold-glow: rgba(0, 0, 0, 0.04);
-  --gold-subtle: #f1f5f9;
+  /* Accent system (legacy "gold" names now carry the brand cyan) */
+  --accent: var(--brand-cyan-deep);
+  --accent-hover: #7af0ff;
+  --accent-subtle: rgba(44, 232, 255, 0.12);
+  --gold-primary: var(--brand-cyan-deep);
+  --gold-light: var(--brand-cyan);
+  --gold-dark: #075e6b;
+  --gold-amber: var(--brand-amber);
+  --gold-gradient: linear-gradient(100deg, #0a8ea3 0%, #6f9a00 100%);
+  --gold-glow: rgba(44, 232, 255, 0.25);
+  --gold-subtle: rgba(44, 232, 255, 0.12);
+
+  /* Status */
+  --success: #5f7d00;
+  --danger: #d93a3f;
+  --danger-subtle: rgba(217, 58, 63, 0.08);
+
+  /* Photo / video overlays */
+  --overlay-soft: rgba(5, 10, 14, 0.35);
+  --overlay-strong: rgba(5, 10, 14, 0.7);
 
   /* Typography */
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-editorial: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* Soft Light Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
-  --shadow-gold: 0 8px 24px rgba(0, 0, 0, 0.06);
-  --shadow-cyan: 0 8px 24px rgba(0, 0, 0, 0.06);
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(15, 26, 36, 0.06), 0 1px 2px rgba(15, 26, 36, 0.04);
+  --shadow-md: 0 8px 24px rgba(15, 26, 36, 0.08);
+  --shadow-lg: 0 18px 44px rgba(15, 26, 36, 0.12);
+  --shadow-gold: 0 10px 28px rgba(10, 127, 145, 0.18);
+  --shadow-cyan: 0 10px 28px rgba(10, 127, 145, 0.18);
 
   /* Layout */
-  --container-max: 1320px;
-  --container-wide: 1540px;
-  --nav-height: 80px;
+  --container-max: 1280px;
+  --container-wide: 1520px;
+  --nav-height: 78px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
 
   /* Transitions */
   --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
@@ -124,14 +153,43 @@ body::before {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: var(--bg-secondary);
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--border-strong);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #9aa7b0;
+}
+
+::selection {
+  background: var(--brand-cyan);
+  color: var(--text-on-accent);
+}
+
+/* Brand stripe in the logo's three colors */
+.brand-stripe {
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-cyan) 0 40%, var(--brand-lime) 40% 75%, var(--brand-amber) 75% 100%);
+}
+
+/* Section eyebrow label */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand-cyan-deep);
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--brand-lime);
 }
 
 /* Typography Hierarchy */
@@ -219,26 +277,26 @@ input, textarea, select {
 
 /* Glassmorphism Classes */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-surface-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-md);
 }
 
 .glass-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
   transition: all var(--transition-normal);
 }
 
 .glass-card:hover {
-  border-color: #cbd5e1;
-  background: #ffffff;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-gold);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-lg);
   transform: translateY(-2px);
 }
 
@@ -249,22 +307,23 @@ input, textarea, select {
   gap: 0.5rem;
   padding: 0.4rem 1rem;
   border-radius: 9999px;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  color: #0f172a;
+  background: var(--accent-subtle);
+  border: 1px solid var(--border-gold);
+  color: var(--brand-cyan-deep);
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
 
-/* Plain Text - Remove mixed colors completely */
+/* Brand accent text: cyan-to-lime, as in the logo */
 .gold-gradient-text {
-  background: none !important;
-  -webkit-background-clip: unset !important;
-  -webkit-text-fill-color: initial !important;
-  color: inherit !important;
-  display: inline !important;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--brand-cyan);
+  display: inline;
 }
 
 /* Buttons */
@@ -286,17 +345,17 @@ input, textarea, select {
 }
 
 .btn-gold {
-  background: #0f172a;
-  color: #ffffff;
-  font-weight: 600;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+  background: var(--brand-cyan);
+  color: var(--text-on-accent);
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(10, 127, 145, 0.22);
 }
 
 .btn-gold:hover {
-  background: #1e293b;
-  color: #ffffff;
+  background: var(--accent-hover);
+  color: var(--text-on-accent);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22);
+  box-shadow: 0 10px 26px rgba(10, 127, 145, 0.3);
 }
 
 .btn-gold:active {
@@ -304,27 +363,26 @@ input, textarea, select {
 }
 
 .btn-outline {
-  background: #ffffff;
-  color: #0f172a;
-  border: 1px solid #cbd5e1;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
 }
 
 .btn-outline:hover {
-  border-color: #0f172a;
-  color: #0f172a;
-  background: #f8fafc;
+  border-color: var(--brand-cyan-deep);
+  color: var(--brand-cyan-deep);
+  background: var(--accent-subtle);
   transform: translateY(-2px);
 }
 
 .btn-ghost {
   background: transparent;
-  color: #475569;
+  color: var(--text-secondary);
   padding: 0.6rem 1rem;
 }
 
 .btn-ghost:hover {
-  color: #0f172a;
+  color: var(--brand-cyan-deep);
   transform: translateX(4px);
 }
 

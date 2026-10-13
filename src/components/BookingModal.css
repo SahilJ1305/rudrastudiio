@@ -1,12 +1,12 @@
 /* ==========================================================================
    BookingModal Component Styles (Stepped Calendar -> Form -> Confirmation)
-   Light Theme & Solid Typography
+   Light editorial theme
    ========================================================================== */
 
 .booking-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.45);
+  background: rgba(5, 10, 14, 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 3000;
@@ -22,10 +22,10 @@
   max-width: 680px;
   max-height: 92vh;
   overflow-y: auto;
-  border-radius: 22px;
-  background: #ffffff;
+  border-radius: var(--radius-lg);
+  background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.16);
+  box-shadow: var(--shadow-lg);
   display: flex;
   flex-direction: column;
   animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -68,7 +68,7 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: #f1f5f9;
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
   display: flex;
@@ -80,9 +80,9 @@
 }
 
 .modal-close-btn:hover {
-  background: #0f172a;
-  color: #ffffff;
-  border-color: #0f172a;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
 }
 
 /* Progress Stepper */
@@ -91,7 +91,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.9rem 2rem;
-  background: #f8fafc;
+  background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -114,8 +114,8 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,9 +125,9 @@
 }
 
 .progress-step.active .step-dot {
-  background: #0f172a;
-  color: #ffffff;
-  border-color: #0f172a;
+  background: var(--brand-cyan);
+  color: var(--text-on-accent);
+  border-color: var(--brand-cyan);
   box-shadow: none;
 }
 
@@ -152,8 +152,8 @@
 
 .calendar-widget {
   padding: 1.4rem;
-  border-radius: 16px;
-  background: #f8fafc;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   margin-bottom: 1.6rem;
 }
@@ -178,7 +178,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--bg-elevated);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   display: flex;
@@ -189,9 +189,9 @@
 }
 
 .cal-nav-btn:hover {
-  background: #0f172a;
-  border-color: #0f172a;
-  color: #ffffff;
+  background: var(--brand-cyan);
+  border-color: var(--brand-cyan);
+  color: var(--text-on-accent);
 }
 
 .calendar-day-headers {
@@ -207,7 +207,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #0f172a;
+  color: var(--brand-cyan-deep);
 }
 
 .calendar-days-grid {
@@ -218,9 +218,9 @@
 
 .cal-day-cell {
   aspect-ratio: 1;
-  border-radius: 10px;
-  background: #ffffff;
-  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,25 +238,27 @@
 }
 
 .cal-day-cell.available:hover {
-  background: #e2e8f0;
-  color: #0f172a;
+  background: var(--accent-subtle);
+  border-color: var(--border-cyan);
+  color: var(--text-primary);
   transform: scale(1.05);
 }
 
 .cal-day-cell.selected {
-  background: #0f172a !important;
-  color: #ffffff !important;
+  background: var(--brand-cyan) !important;
+  color: var(--text-on-accent) !important;
   font-weight: 700;
-  border-color: #0f172a;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+  border-color: var(--brand-cyan);
+  box-shadow: var(--shadow-cyan);
   transform: scale(1.05);
 }
 
 .cal-day-cell.past {
-  opacity: 0.3;
+  opacity: 0.35;
   cursor: not-allowed;
   pointer-events: none;
   background: transparent;
+  border-color: transparent;
 }
 
 .selected-date-preview-bar {
@@ -264,9 +266,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.2rem;
-  background: #f1f5f9;
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-subtle);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   padding: 1rem 1.4rem;
   flex-wrap: wrap;
 }
@@ -278,7 +280,7 @@
 }
 
 .gold-icon {
-  color: #0f172a;
+  color: var(--brand-cyan-deep);
 }
 
 .preview-label {
@@ -305,9 +307,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #f8fafc;
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 0.8rem 1.2rem;
   margin-bottom: 1.6rem;
   flex-wrap: wrap;
@@ -331,7 +333,7 @@
   align-items: center;
   gap: 0.4rem;
   font-size: 0.8rem;
-  color: #0f172a;
+  color: var(--brand-cyan-deep);
   background: none;
   border: none;
   cursor: pointer;
@@ -367,7 +369,7 @@
 }
 
 .req {
-  color: #dc2626;
+  color: var(--danger);
 }
 
 .input-wrap {
@@ -386,9 +388,9 @@
 .modal-input {
   width: 100%;
   padding: 0.78rem 1rem 0.78rem 2.6rem;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-size: 0.92rem;
   outline: none;
@@ -398,9 +400,9 @@
 .modal-select {
   width: 100%;
   padding: 0.78rem 1rem;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-size: 0.92rem;
   outline: none;
@@ -410,9 +412,9 @@
 .modal-textarea {
   width: 100%;
   padding: 0.8rem 1rem;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-size: 0.92rem;
   outline: none;
@@ -422,8 +424,19 @@
 .modal-input:focus,
 .modal-select:focus,
 .modal-textarea:focus {
-  border-color: #0f172a;
-  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+  border-color: var(--brand-cyan-deep);
+  background: var(--bg-primary);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+.modal-input::placeholder,
+.modal-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.modal-select option {
+  background: #ffffff;
+  color: var(--text-primary);
 }
 
 .modal-form-actions {
@@ -451,8 +464,8 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: #f1f5f9;
-  border: 2px solid #0f172a;
+  background: var(--accent-subtle);
+  border: 2px solid var(--brand-cyan-deep);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -460,7 +473,7 @@
 }
 
 .confirm-check {
-  color: #0f172a;
+  color: var(--brand-cyan-deep);
 }
 
 .confirm-title {
@@ -482,10 +495,10 @@
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  background: #f8fafc;
-  border: 1px dashed var(--border-subtle);
+  background: var(--bg-tertiary);
+  border: 1px dashed var(--border-cyan);
   padding: 0.6rem 1.8rem;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   margin-bottom: 1.6rem;
 }
 
@@ -507,9 +520,9 @@
 .confirm-summary-grid {
   width: 100%;
   max-width: 480px;
-  background: #f8fafc;
+  background: var(--bg-tertiary);
   border: 1px solid var(--border-subtle);
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   padding: 1.2rem 1.6rem;
   display: flex;
   flex-direction: column;
@@ -554,7 +567,7 @@
 @media (max-width: 640px) {
   .booking-modal-card {
     max-height: 96vh;
-    border-radius: 18px;
+    border-radius: var(--radius-md);
   }
   .modal-inputs-grid {
     grid-template-columns: 1fr;
@@ -620,3 +633,7 @@
   }
 }
 
+
+.spark-gold {
+  color: var(--brand-cyan-deep);
+}

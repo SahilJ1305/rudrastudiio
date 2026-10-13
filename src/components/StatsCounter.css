@@ -2,18 +2,18 @@
 
 .stats-counter-number {
   font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 4.8vw, 4.4rem);
+  font-size: clamp(2.6rem, 4.4vw, 3.8rem);
   font-weight: 600;
   line-height: 1;
   color: var(--text-primary);
   display: inline-flex;
   align-items: baseline;
   letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 .stats-suffix {
-  font-size: 0.75em;
+  font-size: 0.7em;
   margin-left: 2px;
-  color: var(--text-muted);
+  color: var(--brand-cyan-deep);
 }
-

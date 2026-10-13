@@ -1,5 +1,6 @@
-import React, { useEffect, useCallback } from "react";
-import { X, ChevronLeft, ChevronRight, MapPin, Sparkles, User } from "lucide-react";
+import React, { useEffect, useCallback, useRef } from "react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { getFullsizeUrl } from "../utils/mediaUrl";
 import "./Lightbox.css";
 
 export default function Lightbox({
@@ -10,6 +11,7 @@ export default function Lightbox({
   onNavigate
 }) {
   const currentPhoto = photos[currentIndex];
+  const closeBtnRef = useRef(null);
 
   const handlePrev = useCallback(() => {
     if (!photos.length) return;
@@ -37,12 +39,15 @@ export default function Lightbox({
       }
     };
 
+    const previouslyFocused = document.activeElement;
     window.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
+    if (closeBtnRef.current) closeBtnRef.current.focus();
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
+      if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
     };
   }, [isOpen, onClose, handlePrev, handleNext]);
 
@@ -52,18 +57,8 @@ export default function Lightbox({
     <div className="lightbox-overlay" onClick={onClose} role="dialog" aria-modal="true">
       {/* Top Bar with Counter and Close Button */}
       <div className="lightbox-topbar" onClick={(e) => e.stopPropagation()}>
-        <div className="lightbox-counter">
-          <span className="counter-current">{String(currentIndex + 1).padStart(2, "0")}</span>
-          <span className="counter-sep">/</span>
-          <span className="counter-total">{String(photos.length).padStart(2, "0")}</span>
-        </div>
-
-        <div className="lightbox-category-tag">
-          <Sparkles size={14} className="tag-spark" />
-          <span>{currentPhoto.categoryId ? currentPhoto.categoryId.toUpperCase() : "RUDRA GALLERY"}</span>
-        </div>
-
         <button 
+          ref={closeBtnRef}
           className="lightbox-close-btn" 
           onClick={onClose}
           aria-label="Close fullscreen lightbox"
@@ -100,34 +95,18 @@ export default function Lightbox({
         <div className="lightbox-image-container">
           <img 
             key={currentPhoto.url} 
-            src={currentPhoto.url} 
-            alt={currentPhoto.title || "Rudra Studiio Masterpiece"} 
+            src={getFullsizeUrl(currentPhoto.url)} 
+            alt={currentPhoto.title || "Rudra Studiio photograph"} 
             className="lightbox-active-img"
           />
         </div>
 
-        {/* Bottom Metadata Card */}
         <div className="lightbox-caption-bar">
-          <div className="caption-text-left">
-            <h3 className="caption-title">{currentPhoto.title}</h3>
-            {currentPhoto.description && (
-              <p className="caption-desc">{currentPhoto.description}</p>
-            )}
-          </div>
-
-          <div className="caption-meta-right">
-            {currentPhoto.client && (
-              <div className="meta-pill">
-                <User size={14} />
-                <span>{currentPhoto.client}</span>
-              </div>
-            )}
-            {currentPhoto.location && (
-              <div className="meta-pill">
-                <MapPin size={14} />
-                <span>{currentPhoto.location}</span>
-              </div>
-            )}
+          <h3 className="caption-title">{currentPhoto.title}</h3>
+          <div className="lightbox-counter">
+            <span className="counter-current">{currentIndex + 1}</span>
+            <span className="counter-sep">/</span>
+            <span className="counter-total">{photos.length}</span>
           </div>
         </div>
       </div>

@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowRight, Camera } from "lucide-react";
 import { useBooking } from "../context/BookingContext";
+import { getFullsizeUrl } from "../utils/mediaUrl";
 import "./CTASection.css";
 
 export default function CTASection({
-  heading = "Let's Create Something Beautiful.",
-  subtext = "Have a special moment coming up? Let's turn it into something you'll treasure forever.",
+  heading = "Let's Create Something Meaningful.",
+  subtext = "Contact Rudra Studio to discuss your project, check availability and receive a customized quotation.",
   primaryBtnText = "Book Your Shoot",
-  primaryBtnLink = "/contact",
   secondaryBtnText = "View Our Gallery",
   secondaryBtnLink = "/gallery"
 }) {
@@ -17,9 +17,9 @@ export default function CTASection({
   return (
     <section className="cta-section-wrapper">
       <div className="cta-bg-layer">
-        <img 
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=80" 
-          alt="Cinematic Photography Background" 
+        <img
+          src={getFullsizeUrl("/Images/Prewdding/231A0128 copy.jpg")}
+          alt="Pre-wedding couple photographed by Rudra Studiio"
           className="cta-bg-image"
           loading="lazy"
         />
@@ -30,7 +30,7 @@ export default function CTASection({
         <div className="cta-content-box">
           <div className="cta-badge">
             <Sparkles size={14} className="gold-spark" />
-            <span>RESERVE YOUR DATE</span>
+            <span>GET A QUOTATION</span>
           </div>
 
           <h2 className="cta-heading">{heading}</h2>
@@ -38,8 +38,8 @@ export default function CTASection({
           <p className="cta-subtext">{subtext}</p>
 
           <div className="cta-buttons-row">
-            <button 
-              onClick={() => openBookingModal()} 
+            <button
+              onClick={() => openBookingModal()}
               className="btn btn-gold cta-btn-main"
             >
               <Camera size={18} />
@@ -53,7 +53,7 @@ export default function CTASection({
           </div>
 
           <div className="cta-note">
-            <span>✨ Limited weekend dates available for 2026 celebrations</span>
+            <span>Location: Hadapsar, Pune</span>
           </div>
         </div>
       </div>

@@ -1,0 +1,85 @@
+.client-logos {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 2.25rem 0 2.5rem;
+}
+
+.client-logos-label {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+}
+
+.client-logos-viewport {
+  position: relative;
+  overflow: hidden;
+  /* fade the logos out at both edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+
+.client-logos-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  list-style: none;
+  animation: clientLogosScroll 38s linear infinite;
+}
+
+.client-logos-viewport:hover .client-logos-track {
+  animation-play-state: paused;
+}
+
+.client-logo-item {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  height: 120px;
+  padding: 0 clamp(1.8rem, 4vw, 3.5rem);
+}
+
+.client-logo-img {
+  height: 80px;
+  width: auto;
+  max-width: 210px;
+  object-fit: contain;
+  transition: transform var(--transition-normal);
+}
+
+/* logos whose artwork reads small at the standard height */
+.client-logo-img.is-large {
+  height: 110px;
+  max-width: 290px;
+}
+
+.client-logo-item:hover .client-logo-img {
+  transform: scale(1.06);
+}
+
+@keyframes clientLogosScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .client-logos-track {
+    animation-duration: 120s;
+  }
+}
+
+@media (max-width: 640px) {
+  .client-logo-img {
+    height: 62px;
+    max-width: 160px;
+  }
+  .client-logo-img.is-large {
+    height: 84px;
+    max-width: 210px;
+  }
+  .client-logo-item {
+    height: 92px;
+  }
+  .client-logos-track {
+    animation-duration: 28s;
+  }
+}

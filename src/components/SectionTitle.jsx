@@ -13,8 +13,8 @@ export default function SectionTitle({
     <div className={`section-header-block align-${align} ${className}`}>
       {badge && (
         <div className="section-badge-wrapper">
-          <span className="badge-gold">
-            <span className="badge-dot"></span>
+          <span className="section-eyebrow">
+            <span className="badge-dot" aria-hidden="true"></span>
             {badge}
           </span>
         </div>

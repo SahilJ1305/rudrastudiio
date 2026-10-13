@@ -1,10 +1,14 @@
-import React from "react";
-import { Star, MapPin, ExternalLink, CheckCircle } from "lucide-react";
-import { googleStudioInfo, googleReviews } from "../data/googleReviews";
-import SectionTitle from "./SectionTitle";
+import React, { useEffect, useState } from "react";
+import { Star } from "lucide-react";
+import { googleReviews } from "../data/googleReviews";
 import "./GoogleReviews.css";
 
-// Official Google "G" SVG icon
+// Elfsight "Google Reviews" widget (override with VITE_ELFSIGHT_APP_ID)
+const ELFSIGHT_APP_ID = import.meta.env.VITE_ELFSIGHT_APP_ID || "ce1aabd5-98c4-4dc3-80ab-68578237753f";
+const PLACES_API_KEY = import.meta.env.VITE_GOOGLE_PLACES_API_KEY || "";
+const PLACE_ID = import.meta.env.VITE_GOOGLE_PLACE_ID || "";
+
+// Official Google "G" icon
 function GoogleLogo({ size = 20 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,100 +20,114 @@ function GoogleLogo({ size = 20 }) {
   );
 }
 
-export default function GoogleReviews() {
+function Stars({ value }) {
   return (
-    <section className="google-reviews-section section-padding">
+    <div className="gr-stars" role="img" aria-label={`${value} out of 5 stars`}>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <Star key={i} size={16} className={i <= Math.round(value) ? "gr-star-on" : "gr-star-off"} />
+      ))}
+    </div>
+  );
+}
+
+function ReviewCard({ review }) {
+  return (
+    <article className="gr-card">
+      <header className="gr-card-head">
+        {review.photo ? (
+          <img src={review.photo} alt="" className="gr-avatar" referrerPolicy="no-referrer" loading="lazy" />
+        ) : (
+          <span className="gr-avatar gr-avatar-initial">{(review.author || "?").charAt(0).toUpperCase()}</span>
+        )}
+        <div className="gr-who">
+          {review.authorUrl ? (
+            <a href={review.authorUrl} target="_blank" rel="noopener noreferrer" className="gr-author">{review.author}</a>
+          ) : (
+            <span className="gr-author">{review.author}</span>
+          )}
+          {review.date && <p className="gr-date">{review.date}</p>}
+        </div>
+        <GoogleLogo size={20} />
+      </header>
+      <Stars value={review.rating} />
+      <p className="gr-text">{review.text}</p>
+    </article>
+  );
+}
+
+/** Reviews live from the Google Places API (New). */
+function usePlaceReviews() {
+  const enabled = Boolean(PLACES_API_KEY && PLACE_ID);
+  const [state, setState] = useState({ status: enabled ? "loading" : "off" });
+
+  useEffect(() => {
+    if (!enabled) return;
+    const controller = new AbortController();
+    fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}?languageCode=en`, {
+      headers: {
+        "X-Goog-Api-Key": PLACES_API_KEY,
+        "X-Goog-FieldMask": "displayName,rating,userRatingCount,reviews,googleMapsUri"
+      },
+      signal: controller.signal
+    })
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
+      .then((place) => setState({ status: "ready", place }))
+      .catch((err) => {
+        if (err.name !== "AbortError") setState({ status: "error" });
+      });
+    return () => controller.abort();
+  }, [enabled]);
+
+  return state;
+}
+
+/** Embeds the third-party Elfsight Google Reviews widget. */
+function ElfsightWidget() {
+  useEffect(() => {
+    if (document.querySelector('script[src*="elfsightcdn.com/platform.js"]')) return;
+    const script = document.createElement("script");
+    script.src = "https://elfsightcdn.com/platform.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  return <div className={`elfsight-app-${ELFSIGHT_APP_ID} gr-widget`} data-elfsight-app-lazy />;
+}
+
+export default function GoogleReviews() {
+  const { status, place } = usePlaceReviews();
+
+  const apiReviews = (place?.reviews || [])
+    .filter((r) => r.text?.text)
+    .map((r) => ({
+      author: r.authorAttribution?.displayName,
+      authorUrl: r.authorAttribution?.uri,
+      photo: r.authorAttribution?.photoUri,
+      rating: r.rating,
+      date: r.relativePublishTimeDescription,
+      text: r.text.text
+    }));
+
+  const reviews = apiReviews.length ? apiReviews : googleReviews;
+
+  return (
+    <section className="gr-section section-padding">
       <div className="container">
-        <SectionTitle 
-          title="Google Client Reviews"
-          subtitle="Real reviews and genuine experiences shared by our valued clients in Pune & Maharashtra on Google."
-        />
-
-        {/* Google Studio Summary Card */}
-        <div className="google-summary-card">
-          <div className="summary-left">
-            <div className="google-icon-circle">
-              <GoogleLogo size={32} />
-            </div>
-            <div className="summary-info">
-              <div className="summary-title-row">
-                <h3 className="summary-business-name">{googleStudioInfo.name}</h3>
-                <span className="google-verified-badge">
-                  <CheckCircle size={14} className="badge-check-icon" />
-                  <span>Google Verified</span>
-                </span>
+        {ELFSIGHT_APP_ID ? (
+          <ElfsightWidget />
+        ) : (
+          <>
+            {status === "loading" && <p className="gr-note">Loading reviews from Google…</p>}
+            {reviews.length > 0 && (
+              <div className="gr-grid">
+                {reviews.map((review, index) => (
+                  <ReviewCard key={`${review.author}-${index}`} review={review} />
+                ))}
               </div>
-              <div className="summary-rating-row">
-                <span className="rating-score">{googleStudioInfo.rating}</span>
-                <div className="rating-stars" aria-label={`${googleStudioInfo.rating} out of 5 stars`}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={18} className="star-filled" />
-                  ))}
-                </div>
-                <span className="reviews-count">({googleStudioInfo.totalReviews}+ reviews on Google)</span>
-              </div>
-              <div className="summary-location-row">
-                <MapPin size={15} className="location-pin-icon" />
-                <span className="location-text">{googleStudioInfo.address}</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="summary-right">
-            <a 
-              href={googleStudioInfo.reviewUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn btn-gold google-review-action-btn"
-            >
-              <GoogleLogo size={16} />
-              <span>Review Us on Google</span>
-              <ExternalLink size={15} />
-            </a>
-          </div>
-        </div>
-
-        {/* Reviews Cards Grid */}
-        <div className="google-reviews-grid">
-          {googleReviews.map((rev) => (
-            <div key={rev.id} className="google-review-card">
-              <div className="review-card-header">
-                <div className="review-author-wrap">
-                  <img src={rev.avatar} alt={rev.author} className="review-author-avatar" loading="lazy" />
-                  <div className="review-author-meta">
-                    <h4 className="review-author-name">{rev.author}</h4>
-                    <span className="review-role">{rev.role}</span>
-                  </div>
-                </div>
-                <div className="review-google-badge" title="Verified Google Review">
-                  <GoogleLogo size={16} />
-                </div>
-              </div>
-
-              <div className="review-stars-row">
-                <div className="review-stars">
-                  {[...Array(rev.rating)].map((_, i) => (
-                    <Star key={i} size={15} className="star-filled" />
-                  ))}
-                </div>
-                <span className="review-date">{rev.date}</span>
-              </div>
-
-              {rev.service && (
-                <div className="review-service-pill">
-                  <span>{rev.service}</span>
-                </div>
-              )}
-
-              <p className="review-text">"{rev.review}"</p>
-
-              <div className="review-footer-badge">
-                <CheckCircle size={13} className="verified-check" />
-                <span>Verified Google Review</span>
-              </div>
-            </div>
-          ))}
-        </div>
+            )}
+            {apiReviews.length > 0 && <p className="gr-attribution">Reviews provided by Google</p>}
+          </>
+        )}
       </div>
     </section>
   );
