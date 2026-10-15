@@ -35,7 +35,7 @@ export default function Footer() {
             </p>
 
             <p className="footer-bio">
-              At Rudra Studio, Hadapsar, Pune, we transform special moments and powerful business stories into memorable photographs and films.
+              At Rudra Studiio, Hadapsar, Pune, we transform special moments and powerful business stories into memorable photographs and films.
             </p>
 
             <div className="footer-socials">
@@ -117,7 +117,7 @@ export default function Footer() {
               <div className="footer-contact-item">
                 <MapPin size={18} className="contact-icon" />
                 <div>
-                  <p className="contact-bold">Rudra Studio</p>
+                  <p className="contact-bold">Rudra Studiio</p>
                   <p className="contact-light">{studio.address}</p>
                 </div>
               </div>
@@ -127,7 +127,7 @@ export default function Footer() {
                 <div>
                   <a href={`tel:${studio.phoneTel}`} className="contact-link">{studio.phoneDisplay}</a>
                   <p className="contact-light">
-                    <a href={whatsappUrl("Hello Rudra Studio")} target="_blank" rel="noopener noreferrer" className="contact-link">WhatsApp us</a>
+                    <a href={whatsappUrl("Hello Rudra Studiio")} target="_blank" rel="noopener noreferrer" className="contact-link">WhatsApp us</a>
                   </p>
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function Footer() {
         {/* Footer Bottom Divider & Bar */}
         <div className="footer-bottom-bar">
           <div className="footer-bottom-left">
-            <p>© 2026 Rudra Studio. All Rights Reserved.</p>
+            <p>© 2026 Rudra Studiio. All Rights Reserved.</p>
           </div>
 
           <div className="footer-bottom-center">

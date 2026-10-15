@@ -17,7 +17,7 @@ import "./Contact.css";
 
 const faqs = [
   {
-    q: "How do I book Rudra Studio for my event or project?",
+    q: "How do I book Rudra Studiio for my event or project?",
     a: "Send us an enquiry using the form on this page or the Book a Shoot button. It opens WhatsApp with all your details filled in, and we reply to confirm availability and share a customized quotation."
   },
   {
@@ -105,7 +105,7 @@ export default function Contact() {
                 <span className="eyebrow">Get in Touch</span>
                 <h2 className="info-title">{studio.name}, {studio.city}</h2>
                 <p className="info-desc">
-                  Contact Rudra Studio to discuss your project, check availability and receive a customized quotation.
+                  Contact Rudra Studiio to discuss your project, check availability and receive a customized quotation.
                 </p>
               </div>
 
@@ -119,7 +119,7 @@ export default function Contact() {
                     <h4 className="card-item-title">Call or WhatsApp</h4>
                     <a href={`tel:${studio.phoneTel}`} className="card-item-val link-hover">{studio.phoneDisplay}</a>
                     <p className="card-item-sub">
-                      <a href={whatsappUrl("Hello Rudra Studio")} target="_blank" rel="noopener noreferrer" className="link-hover">Chat on WhatsApp</a>
+                      <a href={whatsappUrl("Hello Rudra Studiio")} target="_blank" rel="noopener noreferrer" className="link-hover">Chat on WhatsApp</a>
                     </p>
                   </div>
                 </div>
@@ -375,7 +375,7 @@ export default function Contact() {
             {/* Map embed */}
             <div className="map-canvas-container">
               <iframe
-                title="Rudra Studio Hadapsar Pune location"
+                title="Rudra Studiio Hadapsar Pune location"
                 src="https://maps.google.com/maps?q=Shop+No.+22,+Chourang+Terrace+Society,+Tukai+Darshan,+Phursungi,+Hadapsar,+Pune&t=&z=15&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="420"
@@ -389,7 +389,7 @@ export default function Contact() {
                 <div className="studio-pin-card">
                   <div className="pin-pulse-dot"></div>
                   <div>
-                    <h5 className="pin-name">RUDRA STUDIO</h5>
+                    <h5 className="pin-name">RUDRA STUDIIO</h5>
                     <p className="pin-address">Tukai Darshan, Phursungi, Hadapsar, Pune</p>
                   </div>
                 </div>

@@ -16,11 +16,11 @@ export default function About() {
     <div className="about-page-root">
       {/* 1. Page header */}
       <PageHero
-        eyebrow="About Rudra Studio"
+        eyebrow="About Rudra Studiio"
         title="We Capture Purpose"
-        subtitle="Every moment has a story. Every brand has a purpose. At Rudra Studio, Hadapsar, Pune, we transform special moments and powerful business stories into memorable photographs and films."
+        subtitle="Every moment has a story. Every brand has a purpose. At Rudra Studiio, Hadapsar, Pune, we transform special moments and powerful business stories into memorable photographs and films."
         image="/Images/baby/231A0695 copy.jpg"
-        imageAlt="Baby portrait by Rudra Studio"
+        imageAlt="Baby portrait by Rudra Studiio"
       />
 
       {/* 2. Our Story Section */}
@@ -32,7 +32,7 @@ export default function About() {
                 src={getThumbUrl(FOUNDER_IMAGE, 800)}
                 srcSet={`${getThumbUrl(FOUNDER_IMAGE, 800)} 800w, ${getFullsizeUrl(FOUNDER_IMAGE)} 864w`}
                 sizes="(max-width: 960px) 100vw, 45vw"
-                alt={`${studio.founder}, founder of Rudra Studio`}
+                alt={`${studio.founder}, founder of Rudra Studiio`}
                 className="story-main-img story-founder-img"
                 loading="lazy"
               />
@@ -46,7 +46,7 @@ export default function About() {
               <span className="eyebrow">Our Story</span>
               <h2 className="story-heading">Photography and Films Under One Roof</h2>
               <p className="story-p">
-                Rudra Studio is a photography and videography studio in Hadapsar, Pune, founded by {studio.founder}. We cover weddings and pre-weddings, kids, maternity and sports, events, conferences and stage shows, as well as product, corporate and industrial work.
+                Rudra Studiio is a photography and videography studio in Hadapsar, Pune, founded by {studio.founder}. We cover weddings and pre-weddings, kids, maternity and sports, events, conferences and stage shows, as well as product, corporate and industrial work.
               </p>
               <p className="story-p">
                 We offer customized packages for different requirements and bring a professional approach to every project, from a family celebration to a company profile film.
@@ -118,7 +118,7 @@ export default function About() {
               <span className="eyebrow">The Team</span>
               <h2 className="team-heading">Behind The Lens</h2>
               <p>
-                The people behind every photograph and film at Rudra Studio, working together to capture your moments and your story.
+                The people behind every photograph and film at Rudra Studiio, working together to capture your moments and your story.
               </p>
               <p className="team-founder">
                 <strong>{studio.founder}</strong>
@@ -129,7 +129,7 @@ export default function About() {
             <figure className="team-photo-frame">
               <img
                 src={getFullsizeUrl(GROUP_IMAGE)}
-                alt="The Rudra Studio team"
+                alt="The Rudra Studiio team"
                 className="team-photo"
                 loading="lazy"
               />
@@ -141,7 +141,7 @@ export default function About() {
       {/* Call to Action */}
       <CTASection
         heading="Let's Create Something Meaningful."
-        subtext="Contact Rudra Studio to discuss your project, check availability and receive a customized quotation."
+        subtext="Contact Rudra Studiio to discuss your project, check availability and receive a customized quotation."
         secondaryBtnText="Explore Our Portfolio"
         secondaryBtnLink="/gallery"
       />

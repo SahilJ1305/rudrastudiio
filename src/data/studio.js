@@ -1,7 +1,7 @@
-// Single source of truth for Rudra Studio's contact details and enquiry hand-off.
+// Single source of truth for Rudra Studiio's contact details and enquiry hand-off.
 
 export const studio = {
-  name: "Rudra Studio",
+  name: "Rudra Studiio",
   tagline: "We Capture Purpose",
   founder: "Laxman Jagtap",
   city: "Hadapsar, Pune",

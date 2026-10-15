@@ -1,4 +1,4 @@
-// Google reviews for Rudra Studio.
+// Google reviews for Rudra Studiio.
 //
 // The homepage shows reviews in one of these ways (first one that is set up wins):
 //   1. VITE_ELFSIGHT_APP_ID   - an Elfsight "Google Reviews" widget (auto-updating, no coding)
@@ -7,7 +7,7 @@
 // See .env.example for setup steps.
 
 export const googleStudioInfo = {
-  name: "Rudra Studio",
+  name: "Rudra Studiio",
   address: "Shop No. 22, Chourang Terrace Society, Tukai Darshan, Phursungi, Hadapsar, Pune",
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Rudra+Photo+Studio+Shop+No+22+Chourang+Terrace+Society+Tukai+Darshan+Phursungi+Hadapsar+Pune"
 };

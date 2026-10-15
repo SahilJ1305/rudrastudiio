@@ -72,7 +72,7 @@ export default function Home() {
             <span className="eyebrow">{studio.name} · {studio.tagline}</span>
             <h2 className="home-h2">Every Moment Has a Story. Every Brand Has a Purpose.</h2>
             <p>
-              At Rudra Studio, Hadapsar, Pune, we transform special moments and powerful business stories into
+              At Rudra Studiio, Hadapsar, Pune, we transform special moments and powerful business stories into
               memorable photographs and films.
             </p>
             <div className="home-intro-actions">
@@ -86,13 +86,13 @@ export default function Home() {
           <div className="home-intro-media">
             <img
               src={getThumbUrl("/Images/Prewdding/231A0474 copy.jpg", 800)}
-              alt="Pre-wedding couple portrait by Rudra Studio"
+              alt="Pre-wedding couple portrait by Rudra Studiio"
               className="home-intro-img home-intro-img-main"
               loading="lazy"
             />
             <img
               src={getThumbUrl("/Images/baby/231A0713 copy.jpg", 800)}
-              alt="Family baby photoshoot by Rudra Studio"
+              alt="Family baby photoshoot by Rudra Studiio"
               className="home-intro-img home-intro-img-accent"
               loading="lazy"
             />
@@ -153,7 +153,7 @@ export default function Home() {
       <section className="home-why section-padding">
         <div className="container home-why-grid">
           <div className="home-why-head">
-            <span className="eyebrow">Why Choose Rudra Studio?</span>
+            <span className="eyebrow">Why Choose Rudra Studiio?</span>
             <h2 className="home-h2">Everything Under One Roof</h2>
           </div>
 

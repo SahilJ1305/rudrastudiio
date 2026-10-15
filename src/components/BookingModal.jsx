@@ -435,7 +435,7 @@ export default function BookingModal({ isOpen, onClose, initialCategory = "weddi
             <h3 className="confirm-title">Your enquiry is ready!</h3>
             <p className="confirm-sub">
               Thank you, <strong>{submittedEnquiry.name}</strong>. WhatsApp should now be open with your enquiry already written.
-              <strong> Press Send in WhatsApp</strong> to deliver it to Rudra Studio.
+              <strong> Press Send in WhatsApp</strong> to deliver it to Rudra Studiio.
             </p>
 
             <div className="confirm-summary-grid glass-card">

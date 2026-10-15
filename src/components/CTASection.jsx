@@ -7,7 +7,7 @@ import "./CTASection.css";
 
 export default function CTASection({
   heading = "Let's Create Something Meaningful.",
-  subtext = "Contact Rudra Studio to discuss your project, check availability and receive a customized quotation.",
+  subtext = "Contact Rudra Studiio to discuss your project, check availability and receive a customized quotation.",
   primaryBtnText = "Book Your Shoot",
   secondaryBtnText = "View Our Gallery",
   secondaryBtnLink = "/gallery"

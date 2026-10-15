@@ -14,7 +14,7 @@ export const studioStats = [
     subtext: "Mastering the art of light"
   },
   {
-    value: 300,
+    value: 1000,
     suffix: "+",
     label: "Happy Clients",
     subtext: "Across India"
