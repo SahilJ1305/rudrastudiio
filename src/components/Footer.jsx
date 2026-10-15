@@ -93,11 +93,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/gallery/industrial" onClick={scrollToTopSmooth}>
-                  <span>Industrial Photography</span>
-                </Link>
-              </li>
-              <li>
                 <Link to="/gallery/product" onClick={scrollToTopSmooth}>
                   <span>Product Photography</span>
                 </Link>

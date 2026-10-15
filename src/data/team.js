@@ -8,7 +8,7 @@ export const studioStats = [
     subtext: "Weddings, events & business projects"
   },
   {
-    value: 12,
+    value: 21,
     suffix: "+",
     label: "Years Experience",
     subtext: "Mastering the art of light"

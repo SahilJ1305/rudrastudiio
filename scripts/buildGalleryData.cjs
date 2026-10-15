@@ -59,6 +59,7 @@ const categoryMapping = [
   {
     id: 'fashion',
     slug: 'fashion',
+    hidden: true, // not shown on the website until the client permission is received
     folder: 'model shoot',
     name: 'Fashion & Model Shoot',
     tagline: 'Haute Couture & Striking Aesthetics',
@@ -70,6 +71,7 @@ const categoryMapping = [
   {
     id: 'portrait',
     slug: 'portrait',
+    hidden: true, // not shown on the website until the client permission is received
     folder: 'corporate profile',
     name: 'Corporate & Portraits',
     tagline: 'Professional Identity & Executive Presence',
@@ -125,6 +127,7 @@ const categoryMapping = [
   {
     id: 'industrial',
     slug: 'industrial',
+    hidden: true, // not shown on the website until the client permission is received
     folder: 'Industrial',
     name: 'Industrial Photography',
     tagline: 'Scale, Engineering & Manufacturing',
@@ -256,6 +259,7 @@ async function pickDiverse(folder, files, coverFile) {
 
 (async () => {
 for (const cat of categoryMapping) {
+  if (cat.hidden) continue;
   const folderPath = path.join(publicImagesDir, cat.folder);
   let files = [];
   if (fs.existsSync(folderPath)) {

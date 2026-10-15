@@ -49,30 +49,6 @@ export const categories = [
     "accent": "Fine Art & Studio Glow"
   },
   {
-    "id": "fashion",
-    "slug": "fashion",
-    "name": "Fashion & Model Shoot",
-    "tagline": "Haute Couture & Striking Aesthetics",
-    "description": "High-octane editorial spreads, designer lookbooks, and avant-garde styling with dynamic movement and runway-level perfection.",
-    "shortDesc": "Bold aesthetic styling, lookbooks, and fashion portfolios.",
-    "coverImage": "/Images/model shoot/231A9417 copy.jpg",
-    "photoCount": 6,
-    "featured": true,
-    "accent": "Lookbooks & Haute Couture"
-  },
-  {
-    "id": "portrait",
-    "slug": "portrait",
-    "name": "Corporate & Portraits",
-    "tagline": "Professional Identity & Executive Presence",
-    "description": "Striking editorial portraits, executive headshots, and leadership profiles using master lighting that reveals character.",
-    "shortDesc": "Executive headshots and leadership portraits with character.",
-    "coverImage": "/Images/corporate profile/231A7645.JPG",
-    "photoCount": 7,
-    "featured": false,
-    "accent": "Executive & Professional"
-  },
-  {
     "id": "product",
     "slug": "product",
     "name": "Product Photography",
@@ -119,18 +95,6 @@ export const categories = [
     "photoCount": 24,
     "featured": false,
     "accent": "Architectural & Hospitality"
-  },
-  {
-    "id": "industrial",
-    "slug": "industrial",
-    "name": "Industrial Photography",
-    "tagline": "Scale, Engineering & Manufacturing",
-    "description": "Dynamic documentation of manufacturing plants, machinery, infrastructure, and heavy engineering processes with dramatic industrial lighting.",
-    "shortDesc": "Engineering scale, manufacturing floors, and machinery.",
-    "coverImage": "/Images/Industrial/231A1500 copy.jpg",
-    "photoCount": 13,
-    "featured": false,
-    "accent": "Engineering & Factory Infrastructure"
   },
   {
     "id": "sports",

@@ -14,16 +14,14 @@ import { useBooking } from "../context/BookingContext";
 import { getThumbUrl } from "../utils/mediaUrl";
 import "./Home.css";
 
-// Desktop placement of the 13 album tiles on a 4 x 5 grid (see .glimpse-grid in Home.css):
+// Desktop placement of the 10 album tiles on a 4 x 4 grid (see .glimpse-grid in Home.css):
 //   wedding  wedding  pre-wed  pre-wed
 //   wedding  wedding  matern.  baby
-//   fashion  portrait product  baby
-//   fashion  jewel.   food     food
-//   interior industr. sports   events
+//   product  jewel.   food     baby
+//   interior sports   events   events
 const SHOWCASE_AREAS = {
   wedding: "w", "pre-wedding": "p", maternity: "m", baby: "b",
-  fashion: "f", portrait: "c", product: "r", jwellery: "j",
-  food: "d", interior: "i", industrial: "n", sports: "s", events: "e"
+  product: "r", jwellery: "j", food: "d", interior: "i", sports: "s", events: "e"
 };
 
 export default function Home() {
